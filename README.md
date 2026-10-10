@@ -85,11 +85,11 @@ flowchart TD
 
 ## Cómo ejecutarlo
 
-El código del producto vive en un repositorio aparte, [Cartagenaonchain/guacalive](https://github.com/Cartagenaonchain/guacalive), que parte del trabajo de [guacamap/guaca-app](https://github.com/guacamap/guaca-app); agradecemos a su autora. Este repositorio reúne los documentos formales del curso y enlaza al código.
+El código del producto vive en un repositorio aparte, [cryptozyzz-eth/Guaca-Core](https://github.com/cryptozyzz-eth/Guaca-Core), que parte del trabajo de [guacamap/guaca-app](https://github.com/guacamap/guaca-app); agradecemos a su autora. Este repositorio reúne los documentos formales del curso y enlaza al código.
 
 **Requisitos:** Node 24 o superior, pnpm 11 o superior y Docker.
 
-**Instalación y ejecución** (desde un clon de guacalive):
+**Instalación y ejecución** (desde un clon de Guaca-Core):
 
 ```bash
 pnpm install
@@ -108,7 +108,7 @@ El mapa queda en `http://localhost:3002/map` y la aplicación del informante en 
 │   ├── semana1/        # Problem Brief y propuestas individuales
 │   ├── semana2/        # Product Blueprint, historias, Lean Canvas
 │   └── semana3/        # Documentacion.md
-├── frontend/           # Enlace y pasos para ejecutar el front (código en guacalive)
+├── frontend/           # Enlace y pasos para ejecutar el front (código en Guaca-Core)
 └── README.md
 ```
 
