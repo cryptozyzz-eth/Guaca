@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" width="900" height="520" font-family="system-ui, -apple-system, Segoe UI, Roboto, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Arquitectura inicial de Guaca</title>
+  <desc id="d">Tres capas: interfaz web, lógica con base de datos y almacenamiento de fotos, y la red Stellar con un contrato Soroban.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#33403c"/>
+    </marker>
+  </defs>
+  <rect width="900" height="520" fill="#f6f4ef"/>
+
+  <text x="450" y="34" text-anchor="middle" font-size="20" font-weight="700" fill="#1c2321">Arquitectura inicial de Guaca</text>
+
+  <!-- Capa interfaz -->
+  <rect x="30" y="60" width="840" height="120" rx="12" fill="#e0f1ee" stroke="#0f7b6c"/>
+  <text x="46" y="84" font-size="13" font-weight="700" fill="#0f7b6c">INTERFAZ (aplicación web PWA, en el navegador del celular)</text>
+  <rect x="60" y="100" width="230" height="60" rx="8" fill="#fff" stroke="#0f7b6c"/>
+  <text x="175" y="126" text-anchor="middle" font-size="14" fill="#1c2321">Mapa del turista</text>
+  <text x="175" y="146" text-anchor="middle" font-size="12" fill="#5b6662">sin cuenta, con sello</text>
+  <rect x="335" y="100" width="230" height="60" rx="8" fill="#fff" stroke="#0f7b6c"/>
+  <text x="450" y="126" text-anchor="middle" font-size="14" fill="#1c2321">Pantalla del informante</text>
+  <text x="450" y="146" text-anchor="middle" font-size="12" fill="#5b6662">reporte, estado y saldo</text>
+  <rect x="610" y="100" width="230" height="60" rx="8" fill="#fff" stroke="#0f7b6c"/>
+  <text x="725" y="126" text-anchor="middle" font-size="14" fill="#1c2321">Pantalla del patrocinador</text>
+  <text x="725" y="146" text-anchor="middle" font-size="12" fill="#5b6662">pedido y fondo</text>
+
+  <!-- Capa lógica -->
+  <rect x="30" y="230" width="840" height="130" rx="12" fill="#fff" stroke="#33403c"/>
+  <text x="46" y="254" font-size="13" font-weight="700" fill="#33403c">LÓGICA (servicio web con API)</text>
+  <rect x="60" y="270" width="230" height="70" rx="8" fill="#f6f4ef" stroke="#33403c"/>
+  <text x="175" y="298" text-anchor="middle" font-size="14" fill="#1c2321">API de Guaca</text>
+  <text x="175" y="318" text-anchor="middle" font-size="12" fill="#5b6662">pedidos, reportes, validación</text>
+  <rect x="335" y="270" width="230" height="70" rx="8" fill="#f6f4ef" stroke="#33403c"/>
+  <text x="450" y="298" text-anchor="middle" font-size="14" fill="#1c2321">Base de datos</text>
+  <text x="450" y="318" text-anchor="middle" font-size="12" fill="#5b6662">reportes, zonas, estados</text>
+  <rect x="610" y="270" width="230" height="70" rx="8" fill="#f6f4ef" stroke="#33403c"/>
+  <text x="725" y="298" text-anchor="middle" font-size="14" fill="#1c2321">Almacén de fotos</text>
+  <text x="725" y="318" text-anchor="middle" font-size="12" fill="#5b6662">las fotos no van en cadena</text>
+
+  <!-- Capa Stellar -->
+  <rect x="30" y="410" width="840" height="100" rx="12" fill="#e8ecf7" stroke="#3b4a9c"/>
+  <text x="46" y="432" font-size="13" font-weight="700" fill="#3b4a9c">STELLAR (red)</text>
+  <rect x="60" y="444" width="230" height="52" rx="8" fill="#fff" stroke="#3b4a9c"/>
+  <text x="175" y="466" text-anchor="middle" font-size="14" fill="#1c2321">Contrato Soroban</text>
+  <text x="175" y="484" text-anchor="middle" font-size="12" fill="#5b6662">fondo, huella y pago</text>
+  <rect x="335" y="444" width="230" height="52" rx="8" fill="#fff" stroke="#3b4a9c"/>
+  <text x="450" y="466" text-anchor="middle" font-size="14" fill="#1c2321">Cuentas y billeteras</text>
+  <text x="450" y="484" text-anchor="middle" font-size="12" fill="#5b6662">dólares digitales</text>
+  <rect x="610" y="444" width="230" height="52" rx="8" fill="#fff" stroke="#3b4a9c"/>
+  <text x="725" y="466" text-anchor="middle" font-size="14" fill="#1c2321">Nodo RPC de Stellar</text>
+  <text x="725" y="484" text-anchor="middle" font-size="12" fill="#5b6662">envía y lee transacciones</text>
+
+  <!-- Flechas -->
+  <line x1="175" y1="160" x2="175" y2="270" stroke="#33403c" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="450" y1="160" x2="300" y2="270" stroke="#33403c" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="725" y1="160" x2="290" y2="285" stroke="#33403c" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="290" y1="305" x2="335" y2="305" stroke="#33403c" stroke-width="2" marker-end="url(#a)" marker-start="url(#a)"/>
+  <line x1="565" y1="305" x2="610" y2="305" stroke="#33403c" stroke-width="2" marker-end="url(#a)" marker-start="url(#a)"/>
+  <line x1="175" y1="340" x2="175" y2="444" stroke="#3b4a9c" stroke-width="2" marker-end="url(#a)" marker-start="url(#a)"/>
+  <text x="187" y="395" font-size="12" fill="#3b4a9c">la red entra aquí</text>
+</svg>

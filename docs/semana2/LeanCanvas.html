@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lean Canvas de Guaca</title>
+<style>
+  :root {
+    --bg: #f6f4ef;
+    --card: #ffffff;
+    --ink: #1c2321;
+    --muted: #5b6662;
+    --line: #d9d5ca;
+    --accent: #0f7b6c;
+    --accent-soft: #e0f1ee;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #141918;
+      --card: #1d2422;
+      --ink: #eaf0ee;
+      --muted: #9fada8;
+      --line: #33403c;
+      --accent: #4fc3b0;
+      --accent-soft: #1f3a35;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 24px 16px 40px;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.45;
+  }
+  header { max-width: 1200px; margin: 0 auto 20px; }
+  h1 { margin: 0; font-size: 1.6rem; }
+  header p { margin: 4px 0 0; color: var(--muted); }
+  .canvas {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-areas:
+      "problema problema solucion solucion uvp uvp ventaja ventaja segmentos segmentos"
+      "problema problema metricas metricas uvp uvp canales canales segmentos segmentos"
+      "costos costos costos costos costos ingresos ingresos ingresos ingresos ingresos";
+  }
+  .block {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .block h2 {
+    margin: 0 0 8px;
+    font-size: .8rem;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .block ul { margin: 0; padding-left: 18px; }
+  .block li { margin-bottom: 5px; font-size: .92rem; }
+  .block p { margin: 0 0 6px; font-size: .92rem; }
+  .uvp { background: var(--accent-soft); border-color: var(--accent); }
+  .uvp .lead { font-size: 1.05rem; font-weight: 600; }
+  .note { color: var(--muted); font-size: .82rem; }
+  .problema { grid-area: problema; }
+  .solucion { grid-area: solucion; }
+  .uvp { grid-area: uvp; }
+  .ventaja { grid-area: ventaja; }
+  .segmentos { grid-area: segmentos; }
+  .metricas { grid-area: metricas; }
+  .canales { grid-area: canales; }
+  .costos { grid-area: costos; }
+  .ingresos { grid-area: ingresos; }
+  footer { max-width: 1200px; margin: 16px auto 0; color: var(--muted); font-size: .82rem; }
+  @media (max-width: 900px) {
+    .canvas {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "problema" "segmentos" "uvp" "solucion" "canales"
+        "metricas" "ventaja" "costos" "ingresos";
+    }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Lean Canvas de Guaca</h1>
+  <p>Cartagena, contada por quien la vive. Mapa en vivo con reportes verificados de locales, pagados automáticamente.</p>
+</header>
+
+<main class="canvas">
+  <section class="block problema">
+    <h2>1. Problema</h2>
+    <ul>
+      <li>El dato fresco (mar picado, zarpes suspendidos, vías, eventos) se pierde en chats de WhatsApp sin fecha ni ubicación.</li>
+      <li>Las reseñas de Google Maps y Tripadvisor son viejas, anónimas y en parte falsas (cerca de 8 % en Tripadvisor, 2024).</li>
+      <li>El local que sabe lo que pasa no recibe nada; pagarle unos pocos miles de pesos es caro o imposible sin banco.</li>
+    </ul>
+    <p class="note"><strong>Alternativas actuales:</strong> WhatsApp, reseñas en línea, hoteles, taxistas y jaladores.</p>
+  </section>
+
+  <section class="block segmentos">
+    <h2>2. Segmento de clientes</h2>
+    <ul>
+      <li><strong>Turista</strong> con dos o tres días en la ciudad: consume el mapa (usuario principal).</li>
+      <li><strong>Informante local</strong> (lanchero, vendedor de playa, mototaxista, guía): produce el dato y cobra.</li>
+      <li><strong>Hoteles, hostales y operadores</strong>: patrocinan pedidos y recomiendan con evidencia (quien paga).</li>
+    </ul>
+    <p class="note"><strong>Adoptantes tempranos:</strong> lancheros del muelle La Bodeguita y locales de Islas del Rosario, Tierra Bomba y Playa Blanca.</p>
+  </section>
+
+  <section class="block uvp">
+    <h2>3. Propuesta de valor única</h2>
+    <p class="lead">Saber hoy, con evidencia verificable, qué está pasando en Cartagena, y que quien lo sabe cobre por decirlo.</p>
+    <ul>
+      <li><strong>Turista:</strong> sello "verificado hace 12 min por 3 locales", sin instalar, registrarse ni pagar.</li>
+      <li><strong>Informante:</strong> pago en minutos, sin cuenta bancaria, con reglas públicas y reputación propia.</li>
+    </ul>
+    <p class="note"><strong>Concepto de alto nivel:</strong> un Waze de las condiciones de la costa, donde cada reporte se paga.</p>
+  </section>
+
+  <section class="block solucion">
+    <h2>4. Solución</h2>
+    <ul>
+      <li>Pedido de información con foto, lugar y hora, publicado por un patrocinador.</li>
+      <li>Reporte del local en pocos toques desde el celular, con estado visible (enviado, en validación, pagado).</li>
+      <li>Validación por varios locales o cruce con datos de clima.</li>
+      <li>Pago automático al validarse; los fondos se bloquean al publicar el pedido.</li>
+      <li>Mapa web abierto con sello de antigüedad y confirmaciones.</li>
+    </ul>
+  </section>
+
+  <section class="block metricas">
+    <h2>5. Métricas clave</h2>
+    <ul>
+      <li>Tiempo entre el pedido y el pago.</li>
+      <li>% de reportes validados sin disputa.</li>
+      <li>Costo por reporte frente a la recompensa.</li>
+      <li>Reportes verificados por zona y por día.</li>
+      <li>Informantes activos y recurrentes.</li>
+      <li>Disposición del turista a confiar en un dato verificable frente a una reseña.</li>
+    </ul>
+  </section>
+
+  <section class="block ventaja">
+    <h2>6. Ventaja diferencial</h2>
+    <ul>
+      <li>Reportes con autor, evidencia y huella registrada en cadena, que ni Guaca puede alterar después.</li>
+      <li>Pago automático con reglas públicas, sin intermediario que decida a quién pagar.</li>
+      <li>Histórico propio de datos frescos de la costa, difícil de copiar sin la red de locales.</li>
+      <li>Equipo que vive en Cartagena y valida en campo.</li>
+    </ul>
+  </section>
+
+  <section class="block canales">
+    <h2>7. Canales</h2>
+    <ul>
+      <li>Grupos de WhatsApp de lancheros y locales por zona (informantes).</li>
+      <li>Códigos QR en hoteles, hostales y muelles (turistas).</li>
+      <li>Mapa web (PWA) con enlace compartible, sin cuenta.</li>
+      <li>Trabajo de campo directo con líderes comunitarios.</li>
+    </ul>
+  </section>
+
+  <section class="block costos">
+    <h2>8. Estructura de costos</h2>
+    <ul>
+      <li>Recompensas a informantes (el costo principal, cubierto por los patrocinadores).</li>
+      <li>Costo por transacción en la red: debe ser de centavos, muy por debajo de la recompensa.</li>
+      <li>Alojamiento, base de datos y almacenamiento de fotos.</li>
+      <li>Consulta de datos de clima.</li>
+      <li>Trabajo de campo y captación de locales.</li>
+      <li>Conversión de saldo a pesos (rampa de salida), si se ofrece.</li>
+    </ul>
+  </section>
+
+  <section class="block ingresos">
+    <h2>9. Fuentes de ingreso</h2>
+    <ul>
+      <li>Hoteles y operadores pagan por pedidos patrocinados: depositan el fondo para que se informe el estado de una zona.</li>
+      <li>El turista y el informante no pagan por usar Guaca.</li>
+    </ul>
+    <p class="note">Los montos y la comisión de Guaca, si la hay, quedan por validar en campo.</p>
+  </section>
+</main>
+
+<footer>Guaca · Entregable de semana 2 (Product Blueprint) · Cartagena On Chain</footer>
+</body>
+</html>
