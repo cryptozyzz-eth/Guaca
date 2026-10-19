@@ -1,80 +1,71 @@
 # Documentación — Semana 3
 
+> Actualizada en la semana 4. En la primera versión declaramos la opción A (contrato propio en Soroban). Al construir la integración vimos que la opción B cubría lo necesario para probar el ciclo de pago en testnet, y la decisión técnica quedó corregida abajo con su razón. El código se trabaja en [Guaca-Core](https://github.com/cryptozyzz-eth/Guaca-Core) y este repositorio conserva los reportes del curso (ver la nota en [docs/semana4/MVPFunctional.md](../semana4/MVPFunctional.md)).
+
 ## 1. Front construido
 
-El desarrollo del producto se hace en el repositorio [cryptozyzz-eth/Guaca-Core](https://github.com/cryptozyzz-eth/Guaca-Core). Este repositorio (Guaca) reúne los documentos formales del curso y enlaza a ese código. Preferimos mantenerlo así, por orden y con respeto: Guaca-Core parte del trabajo de [guacamap/guaca-app](https://github.com/guacamap/guaca-app), y no queríamos dejar su código fuente copiado aquí como un fork. Agradecemos a su autora. Los pasos para ejecutar el front están en [frontend/README.md](../../frontend/README.md).
+El front vive en el repositorio de código [Guaca-Core](https://github.com/cryptozyzz-eth/Guaca-Core), en `apps/app` (aplicación web instalable, PWA, hecha con Next.js), con un sitio de presentación en `apps/web` y un panel de operación en `apps/admin`. Los pasos para ejecutarlo están en el [README de Guaca-Core](https://github.com/cryptozyzz-eth/Guaca-Core#running-it) y se resumen en [frontend/README.md](../../frontend/README.md). El proyecto parte de [guacamap/guaca-app](https://github.com/guacamap/guaca-app), bajo licencia Apache 2.0, y agradecemos a su autora.
 
-Lo que sigue describe las pantallas de Guaca-Core según su README y su documento de producto (`PRODUCT.md`), y cómo se relacionan con el MVP del [Product Blueprint](../semana2/ProductBlueprint.md). No describe pantallas que no hemos visto funcionando.
+Lo que sigue describe las pantallas según el código y la documentación del repositorio, y cómo se relacionan con el MVP del [Product Blueprint](../semana2/ProductBlueprint.md).
 
-**Pantallas disponibles en Guaca-Core**
+**Pantallas**
 
-- **Página de presentación** (`localhost:3000`): sitio de marca y páginas legales, hecho en Next.js.
-- **Mapa** (`localhost:3002/map`): mapa con lugares verificados de la zona cubierta, en una aplicación web instalable (PWA), pensada para celular y conexiones lentas.
-- **Aplicación del informante, "Spotter"** (`localhost:3002/spotter`): pantalla en español donde un local recibe misiones pagadas, ubica y fotografía un lugar y lo verifica.
-- **Vista por código QR** (`localhost:3002/v/qr-marina`): vista que un hotel o posada muestra a sus huéspedes para que consulten sin instalar nada ni pagar.
-- **Administración** (`localhost:3003`, con token): un operador humano revisa vacíos de cobertura, misiones, informantes y verificaciones.
-- **API** (`localhost:3001`): servicio que conecta las pantallas con la base de datos.
+- **Presentación** (`apps/web`, `localhost:3000`): sitio de marca con páginas legales.
+- **Portada y elección de rol** (`apps/app`): punto de entrada de la aplicación, con un selector de rol.
+- **Mapa** (`/map`): lugares con su nivel de confianza (verificado por locales, corroborado por datos abiertos o solo listado), pensado para celular y conexiones lentas.
+- **Vista por código QR** (`/v/[código]` y `/qr-card/[código]`): lo que un hotel o posada muestra a sus huéspedes para consultar sin instalar nada ni pagar.
+- **Aplicación del informante, "Spotter"** (`/spotter`, en español): misiones pagadas, reporte con foto y ubicación, historial de cobros y, desde la semana 4, la tarjeta "Activar cobros" que crea la billetera.
+- **Comercio** (`/merchant`): vista pensada para el negocio que patrocina (por confirmar al ejecutarla).
+- **Administración** (`apps/admin`, `localhost:3003`, con token): un operador revisa vacíos de cobertura, misiones, informantes y verificaciones, y puede ordenar el pago de una misión verificada.
+- **API** (`apps/api`, `localhost:3001`): conecta las pantallas con la base de datos y con Stellar.
 
 **Cómo se conectan con el MVP del Blueprint**
 
-El MVP de la sección 4 del Blueprint recorre cinco pasos. Esta es la correspondencia con lo que existe hoy:
-
-| Paso del MVP | Qué hay en Guaca-Core | Brecha |
+| Paso del MVP | Qué hay hoy | Brecha |
 | :---- | :---- | :---- |
-| El patrocinador publica un pedido y deposita el fondo | El sistema detecta vacíos de cobertura y crea misiones pagadas. El dueño del inmueble figura con un plan, que solo sirve como señal de demanda. | No hay depósito ni cobro: no existe un flujo de pago del patrocinador. |
-| El informante reporta con foto y ve su estado | La aplicación del informante cubre ubicar, fotografiar y verificar un lugar. | Falta confirmar si muestra el estado del reporte y el saldo en pesos. |
-| Validación por la confirmación de 2 locales | Hay verificación por agente y por operador. | La regla de dos locales distintos no es la regla actual. |
-| Pago automático al validarse | Los pagos pasan por una sola interfaz, `PayoutProvider`; hoy solo funciona la versión simulada. | Es la pieza que Stellar vendría a reemplazar. |
-| Mapa con sello de antigüedad y confirmaciones | El mapa y la vista QR muestran lugares verificados con niveles de confianza. | Falta confirmar que muestre "hace X min · N locales". |
+| El patrocinador publica un pedido y deposita el fondo | El sistema detecta vacíos de cobertura y crea misiones pagadas; el comercio aparece con un plan que sirve como señal de demanda. | No hay depósito ni cobro al patrocinador. |
+| El informante reporta con foto y ve su estado | La aplicación del informante cubre ubicar, fotografiar y verificar un lugar, y muestra el historial con el estado de cada misión. | Falta confirmar el saldo en pesos. |
+| Validación por la confirmación de 2 locales | Hay verificación por agentes y por operador, y una confirmación por un segundo informante cercano. | La regla de dos locales distintos como condición del pago no está cableada. |
+| Pago automático al validarse | Una misión verificada se paga desde el panel del operador por la interfaz `PayoutProvider`; si el informante activó su billetera, el pago sale en USDC de testnet. | El disparo es manual, no automático. |
+| Mapa con sello de antigüedad y confirmaciones | El mapa muestra lugares con niveles de confianza. | Falta el sello "hace X min · N locales". |
 
-Dos diferencias importantes entre Guaca-Core y nuestro MVP:
+Dos diferencias entre el código heredado y nuestro MVP:
 
-1. **Zona y datos.** Guaca-Core modela hoy Puerto Cabello (Venezuela) con datos ficticios. Nuestro MVP es una zona de Cartagena (muelle La Bodeguita e islas) y la categoría lanchas y estado del mar.
-2. **Cadena.** El producto actual declara "sin token y sin cadena". Nuestra propuesta añade Stellar como proveedor de pagos y registro detrás de `PayoutProvider`, sin cambiar las reglas de producto de Guaca-Core.
+1. **Zona y datos.** El proyecto modelaba Puerto Cabello (Venezuela). Añadimos misiones de demostración de Cartagena y Medellín para el MVP, con datos ficticios.
+2. **Cadena.** El producto original declaraba "sin token ni cadena". Añadimos Stellar como un carril de pagos solo en testnet detrás de `PayoutProvider`: quien no activa su billetera sigue en el pago simulado.
 
-Capturas de pantalla: pendientes de tomar al ejecutar Guaca-Core localmente. Enlace hospedado: no hay todavía.
+Capturas de pantalla: pendientes. Enlace en vivo: no hay todavía.
 
 ## 2. Decisión técnica
 
-**Opción elegida: A, contrato propio en Soroban (la plataforma de contratos de Stellar), solo en testnet.** En esta semana solo se documenta; no se escribe ni se despliega código.
+**Opción elegida: B, tecnología existente del ecosistema Stellar, solo en testnet.** Usamos Pollar (infraestructura de billeteras de Stellar con abstracción de cuentas) para crear la billetera del informante, y pagos nativos de Stellar en USDC de testnet. No escribimos ni desplegamos contratos propios.
 
-**Qué registraría y ejecutaría el contrato**
+**Para qué sirve cada pieza**
 
-- **Fondo del pedido:** guarda el dinero que el patrocinador deposita para un pedido, bloqueado hasta que se cumpla o venza.
-- **Huella del reporte:** registra el hash de la foto junto con el lugar, la hora y el autor. La foto en sí queda fuera de la cadena, en el almacén de archivos.
-- **Confirmaciones:** cuenta las confirmaciones de locales distintos.
-- **Pago:** al llegar a dos confirmaciones, paga automáticamente al informante.
+- **Pollar:** el informante crea su billetera con un código por correo, sin frase semilla y con comisiones patrocinadas. Responde al supuesto del Problem Brief de que el local no tiene cuenta bancaria ni sabe de claves.
+- **Pagos nativos de Stellar en USDC:** una cuenta tesorería paga la recompensa al informante, con un memo de idempotencia para no pagar dos veces, y guardamos el hash de la transacción para mostrar un comprobante público.
 
-**Por qué hace falta un contrato propio.** El criterio de pertinencia del Problem Brief dice que quien opera una base de datos es parte interesada: podría borrar un reporte negativo o cambiar un pago ya cumplido sin que nadie lo detecte. Un contrato con reglas públicas deja el fondo, el registro y la regla de pago a la vista de todos. Ninguna herramienta existente combina estas tres cosas con la regla de "dos locales distintos".
-
-**Dónde encaja en Guaca-Core.** Su único punto de pago es la interfaz `PayoutProvider`. La idea es añadir una versión que hable con Stellar, sin tocar el resto: la misión pagada sería el pedido con fondo, y el pago al informante se haría en USDC con una cuenta creada al primer reporte.
+**Por qué no un contrato propio (todavía).** Un contrato Soroban encaja con el Blueprint (fondo bloqueado del patrocinador, huella del reporte y pago por dos confirmaciones), pero para esta etapa no hacía falta: el objetivo era probar que el informante cobra en minutos y sin banco, y un pago nativo lo prueba con menos código, menos riesgo y costo de centavos. La contrapartida es honesta: la tesorería central reintroduce confianza en quien la opera, y esa es la razón por la que el contrato sigue siendo el siguiente paso.
 
 **Alternativas descartadas**
 
-- **Opción B, solución existente de Stellar** (por ejemplo, saldos reclamables y pagos nativos): sirve para pagos simples, pero no cuenta confirmaciones ni registra la huella.
-- **Base de datos tradicional con auditoría:** más barata, pero la controla quien la opera.
+- **Contrato Soroban propio ahora:** más trabajo y más superficie de error para el plazo disponible; queda como trabajo futuro.
+- **Base de datos tradicional con auditoría:** la controla quien la opera, que podría cambiar un pago o borrar un reporte.
 - **Pasarelas de pago tradicionales:** las comisiones superan la recompensa y exigen cuenta bancaria.
 
-**Riesgo conocido.** La billetera del informante la custodia Guaca para que cobrar sea fácil. Eso reintroduce confianza en la custodia, aunque el fondo y la regla de pago siguen siendo públicos.
+**Riesgo conocido.** El enlace entre el usuario y su billetera no se verifica contra Pollar en esta demostración; en producción debe verificarse.
 
 ## 3. Participación del equipo
 
-| Integrante | Usuario de GitHub | Aporte |
-| :---- | :---- | :---- |
-| Julián García | julian.garc@hotmail.com | Pendiente de completar |
-| Robert López | nwrobj@gmail.com | Pendiente de completar |
-| Sergio Martínez Marín | sergiotechx@yahoo.com | Pendiente de completar |
-| Juan David Correa | cartagenaonchain@gmail.com | Pendiente de completar |
-
-Los usuarios son los correos registrados en la semana 1; faltan los nombres de usuario reales de GitHub.
+Las decisiones se acuerdan en reuniones del equipo, donde cada integrante aporta conocimientos complementarios (origen del proyecto, análisis de datos, desarrollo de negocio y desarrollo técnico). Lo publicado en GitHub ha sido hecho principalmente por la cuenta `sergiotechx`, que registra los commits de la integración con Stellar y Pollar.
 
 ## 4. Bloqueos y siguiente paso
 
 **Bloqueos**
 
-- El front corre desde Guaca-Core, no desde este repositorio; quien califique debe seguir el enlace. Para reducirlo, el README da los pasos exactos y falta un enlace hospedado.
-- Ejecutar Guaca-Core exige pnpm y Docker, que aún no están en todos los equipos del grupo.
-- Guaca-Core modela Puerto Cabello con datos ficticios; falta adaptarlo a Cartagena.
-- Falta confirmar la hora límite exacta de la entrega.
+- No hay producto en línea; ejecutarlo exige Node 24, pnpm 11, Docker y claves de prueba.
+- El pago lo ordena un operador; falta automatizarlo con la regla de dos confirmaciones.
+- El fondo del patrocinador no existe todavía.
+- Faltan las capturas de pantalla.
 
-**Siguiente paso:** correr Guaca-Core y tomar las capturas, definir con la autora y el equipo cómo se integra la versión de Stellar, y escribir el contrato en testnet.
+**Siguiente paso:** desplegar el producto, escribir el contrato Soroban con el fondo del patrocinador y la regla de dos confirmaciones, y validar con informantes y patrocinadores (ver el plan de validación en la semana 4).

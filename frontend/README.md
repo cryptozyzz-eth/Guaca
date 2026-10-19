@@ -2,7 +2,7 @@
 
 El código del producto, incluido el front, se desarrolla en un repositorio aparte: **[cryptozyzz-eth/Guaca-Core](https://github.com/cryptozyzz-eth/Guaca-Core)**.
 
-Este repositorio (Guaca) reúne los documentos formales del curso (`docs/semana1` a `docs/semana5`) y enlaza al código. Se decidió mantenerlo así para no duplicar ni dejar como copia el código fuente, que parte del trabajo original de [guacamap/guaca-app](https://github.com/guacamap/guaca-app).
+Este repositorio (Guaca) reúne los documentos formales del curso (`docs/semana1` a `docs/semana5`) y enlaza al código. Se mantiene así para que los reportes del curso no se mezclen con el código del proyecto, que parte del trabajo original de [guacamap/guaca-app](https://github.com/guacamap/guaca-app).
 
 ## Cómo ejecutar el front
 
@@ -26,6 +26,8 @@ Direcciones locales:
 | Aplicación del informante (Spotter) | http://localhost:3002/spotter |
 | Administración (con token) | http://localhost:3003 |
 | API | http://localhost:3001 |
+
+Para probar los cobros en la red de pruebas de Stellar (testnet) se necesitan claves de prueba de Pollar y una cuenta tesorería de testnet; los nombres de las variables están en `apps/api/.env.example` y `apps/app/.env.example` de Guaca-Core. Nunca se suben valores reales al repositorio.
 
 Los pasos salen del README de Guaca-Core; si cambian allá, esa es la fuente que vale.
 
