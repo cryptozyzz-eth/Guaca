@@ -20,7 +20,7 @@ La integración con Stellar nace del curso **Blockchain Builders 101**, que nos 
 | Evidencia | Enlace |
 | :---- | :---- |
 | Producto en vivo | Pendiente: hoy corre en local (ver Riesgos y pendientes) |
-| Video de la demostración (máximo 3 minutos) | Pendiente de publicar |
+| Video de la demostración (máximo 3 minutos) | [Ver el video](https://canva.link/93jnli20016sv4v) |
 | Pago de 3 USDC en testnet | [Transacción 772a2d1d…9396](https://stellar.expert/explorer/testnet/tx/772a2d1d861987692ad150dd6314546d992ea28932f8e65a94ef2978d8099396) |
 | Billetera del informante creada con Pollar | [Cuenta GANNAM2Q…SXXMB](https://stellar.expert/explorer/testnet/account/GANNAM2QZNOXJM3FLP43UWK3PU6YEKXONUR6JDHOHN7LA7DG45MSXXMB) |
 | Creación de esa cuenta, con comisiones patrocinadas | [Transacción cca05c7b…986e](https://stellar.expert/explorer/testnet/tx/cca05c7b1e99893b14d398473b68fb533439769d32a33a300c373437acb6986e) |
